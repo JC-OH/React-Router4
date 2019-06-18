@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Home, About } from 'pages';
 
 // 지금의 경우에는 개발서버쪽에서 historyApiFallback 설정을 통하여 어떤 요청으로 들어오던
@@ -20,7 +20,17 @@ class App extends Component {
             {/*첫번째 라우트의 경우엔 exact 가 붙어있지요? 이게 붙어있으면 주어진 경로와 정확히 맞아 떨어져야만 설정한 컴포넌트를 보여줍니다.*/}
             <Route exact path="/" component={Home}/>
             {/*두 컴포넌트가 같이 보여졌죠? exact 를 하지 않으면, /about 에도 / 가 있기 때문에, 매칭이 되어서 보여지는거랍니다. 확인을 하셨다면 다시 exact 를 적으세요.*/}
-            <Route path="/about" component={About}/>
+            {/*<Route path="/about" component={About}/>*/}
+            {/*URL 쿼리의 경우엔 컴포넌트 내에서 동적으로 사용 할 수 있고, params 의 경우엔 사용하기 전에 꼭 라우트에서 지정을 해주어야합니다.*/}
+            {/*App 컴포넌트에서 다음과 같이 /about/:name 라우트를 추가하세요.*/}
+            {/*About 컴포넌트가 중복됐군요.어떻게 해결해야할까요? 네. exact 를 사용하면 되겠죠? */}
+            {/*<Route path="/about/:name" component={About}/>*/}
+            <Switch>
+                {/*주의 하실 점은, 먼저 비교 할 라우트를 위에 작성하셔야 한다는 점 입니다. 만약에 /about 을 /about/:name 보다 위에 넣어준다면, name 을 입력해주어도 나타나지 않을거에요.*/}
+                <Route path="/about/:name" component={About}/>
+                <Route path="/about" component={About}/>
+            </Switch>
+
         </div>
     );
     }
