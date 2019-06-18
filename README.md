@@ -28,6 +28,18 @@ $ yarn add query-string
 > - **location** 이 객체는 현재 경로에 대한 정보를 지니고 있고 URL 쿼리 (/about?foo=bar 형식) 정보도 가지고있습니다.
 > - **match** 이 객체에는 어떤 라우트에 매칭이 되었는지에 대한 정보가 있고 params (/about/:name 형식) 정보를 가지고있습니다.
 
+### 헷갈리는 값들
+라우트가 받는 props 중에서, 상당히 헷갈리는 값들이 있습니다.
+
+> - location.pathname
+> - lmatch.path
+> - lmatch.url
+
+location.pathname 은 현재 브라우저상의 위치를 알려줍니다. 이 값은 어떤 라우트에서 렌더링하던 동일합니다.
+match 관련은 설정한 Route 와 직접적으로 관계된 값만 보여줍니다.
+> - Posts 를 보여주는 라우트에선 :id 값을 설정하지 않았으니 path 와 url 이 둘다 /posts 입니다.
+> - Post 를 보여주는 라우트에선 path 의 경우엔 라우트에서 설정한 path 값이 그대로 나타납니다. url 의 경우엔 :id 부분에 값이 들어간 상태로 나타납니다.
+
 ## Available Scripts
 
 In the project directory, you can run:
