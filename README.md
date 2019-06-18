@@ -1,5 +1,10 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+```angular2
+$ yarn add react-router-dom
+$ yarn add cross-env --dev
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
