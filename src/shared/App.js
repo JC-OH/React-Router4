@@ -3,6 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 // import { Home, About } from 'pages';
 import { Home, About, Posts } from 'pages';
 import Menu from 'components/Menu';
+
+
 // 지금의 경우에는 개발서버쪽에서 historyApiFallback 설정을 통하여 어떤 요청으로 들어오던
 // 저희 어플리케이션이 불러와져있는 index.html 을 보여주도록 설정하기 때문입니다.
 //
@@ -13,6 +15,12 @@ import Menu from 'components/Menu';
 // 그렇게 하지 않으면 서버측에서는 연결 할 라우트가 없어서 404 Not Found 페이지만 뜰 것입니다.
 
 class App extends Component {
+    handleClick = () => {
+        import('../notify').then(({ default: notify }) => {
+            notify();
+        });
+    };
+
     render() {
         return (
         <div>
@@ -33,7 +41,7 @@ class App extends Component {
                 <Route path="/about" component={About}/>
             </Switch>
             <Route path="/posts" component={Posts}/>
-
+            <button onClick={this.handleClick}>Click Me</button>
         </div>
     );
     }
