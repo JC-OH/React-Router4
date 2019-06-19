@@ -6,6 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 $ yarn add react-router-dom
 $ yarn add cross-env --dev
 $ yarn add query-string
+$ yarn add react-lodable 
 ```
 
 > - **react-router-dom**: 브라우저에서 사용되는 리액트 라우터 입니다.
