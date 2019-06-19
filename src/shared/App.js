@@ -3,6 +3,9 @@ import { Route, Switch } from 'react-router-dom';
 // import { Home, About } from 'pages';
 import { Home, About, Posts } from 'pages';
 import Menu from 'components/Menu';
+import withSplitting from 'lib/withSplitting';
+
+const SplitMe = withSplitting(() => import('components/SplitMe'));
 
 
 // 지금의 경우에는 개발서버쪽에서 historyApiFallback 설정을 통하여 어떤 요청으로 들어오던
@@ -15,27 +18,34 @@ import Menu from 'components/Menu';
 // 그렇게 하지 않으면 서버측에서는 연결 할 라우트가 없어서 404 Not Found 페이지만 뜰 것입니다.
 
 class App extends Component {
+    // state = {
+    //     SplitMe: null
+    // }
+    // handleClick = () => {
+    //     // import('../notify').then(({ default: notify }) => {
+    //     //     notify();
+    //     // });
+    //
+    //     // handleClick 이 호출되면, 비동기적으로 SplitMe 를 불러와서 state 에 담습니다.
+    //     // 그리고, render 함수에서는 state 안에 있는 SplitMe 가 유효 할 때만 렌더링을 해줍니다.
+    //     // 이로서, 컴포넌트 관련 코드를 다른 파일로 분리시키고, 필요할 때 불러와서 사용 할 수 있게 됩니다.
+    //     import('components/SplitMe').then(({ default: SplitMe }) => {
+    //         this.setState({
+    //             SplitMe
+    //         });
+    //     });
+    // };
     state = {
-        SplitMe: null
-    }
+        visible: false
+    };
     handleClick = () => {
-        // import('../notify').then(({ default: notify }) => {
-        //     notify();
-        // });
-
-        // handleClick 이 호출되면, 비동기적으로 SplitMe 를 불러와서 state 에 담습니다.
-        // 그리고, render 함수에서는 state 안에 있는 SplitMe 가 유효 할 때만 렌더링을 해줍니다.
-        // 이로서, 컴포넌트 관련 코드를 다른 파일로 분리시키고, 필요할 때 불러와서 사용 할 수 있게 됩니다.
-        import('components/SplitMe').then(({ default: SplitMe }) => {
-            this.setState({
-                SplitMe
-            });
+        this.setState({
+            visible: true
         });
     };
-
     render() {
-        const { SplitMe } = this.state;
-
+        // const { SplitMe } = this.state;
+        const { visible } = this.state;
         return (
         <div>
             <Menu/>
@@ -56,7 +66,7 @@ class App extends Component {
             </Switch>
             <Route path="/posts" component={Posts}/>
             <button onClick={this.handleClick}>Click Me</button>
-            {SplitMe && <SplitMe />}
+            {visible && <SplitMe/>}
         </div>
     );
     }
