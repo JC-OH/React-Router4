@@ -15,13 +15,27 @@ import Menu from 'components/Menu';
 // 그렇게 하지 않으면 서버측에서는 연결 할 라우트가 없어서 404 Not Found 페이지만 뜰 것입니다.
 
 class App extends Component {
+    state = {
+        SplitMe: null
+    }
     handleClick = () => {
-        import('../notify').then(({ default: notify }) => {
-            notify();
+        // import('../notify').then(({ default: notify }) => {
+        //     notify();
+        // });
+
+        // handleClick 이 호출되면, 비동기적으로 SplitMe 를 불러와서 state 에 담습니다.
+        // 그리고, render 함수에서는 state 안에 있는 SplitMe 가 유효 할 때만 렌더링을 해줍니다.
+        // 이로서, 컴포넌트 관련 코드를 다른 파일로 분리시키고, 필요할 때 불러와서 사용 할 수 있게 됩니다.
+        import('components/SplitMe').then(({ default: SplitMe }) => {
+            this.setState({
+                SplitMe
+            });
         });
     };
 
     render() {
+        const { SplitMe } = this.state;
+
         return (
         <div>
             <Menu/>
@@ -42,6 +56,7 @@ class App extends Component {
             </Switch>
             <Route path="/posts" component={Posts}/>
             <button onClick={this.handleClick}>Click Me</button>
+            {SplitMe && <SplitMe />}
         </div>
     );
     }
